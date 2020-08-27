@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>ポケモンじゃんけん</title>
+</head>
+<body>
+<header>
+  <h1>ポケモンゲットじゃんけん</h1>
+</header>
+<main>
+  <div class="haikei"></div>
+  <select id="example">
+    <option value="Zenigame">ゼニガメ</option>
+    <option value="Fushigidane">フシギダネ</option>
+    <option value="Hitokage">ヒトカゲ</option>
+  </select>
+  <ul>
+    <li id="gu_btn">グー</li>
+    <li id="cho_btn">チョキ</li>
+    <li id="par_btn">パー</li>
+  </ul>
+  <ul class="shouhaihyou">
+    <li id="Gu_point">グー勝ち</li>
+    <li id="Cho_point">チョキ勝ち</li>
+    <li id="Pa_point">パー勝ち</li>
+    <li id="Total_point">合計</li>
+  </ul>
+  <div>コンピュータの出した手は？「<span id="pc_hands">なに？</span>」</div>
+  <div id="judgment">勝ち</div>
+  <div id="battle_field">
+    <div id="player_field"></div>
+    <div id="computer_field"></div>
+  </div>
+</main>
+<footer></footer>
+<script>
+//じゃんけん用のSCRIPTを書いてください
+
+
+let pointGu=0;
+let pointCho=0;
+let pointPa=0;
+let pointTotal=0;
+
+let pokemon="Fushigidane";
+
+// ここがわからんここがわからんここがわからん
+// ここがわからんここがわからんここがわからん
+// ここがわからんここがわからんここがわからん
+// ここがわからんここがわからんここがわからん
+// ここがわからんここがわからんここがわからん
+$('#example').click(function() {
+    let r = $('option:selected').val(); 
+    console.log(r);
+    pokemon=r;
+})
+// ここがわからんここがわからんここがわからん
+// ここがわからんここがわからんここがわからん
+// ここがわからんここがわからんここがわからん
+// ここがわからんここがわからんここがわからん
+// ここがわからんここがわからんここがわからん
+// ここがわからんここがわからんここがわからん
+
+
+switch(pokemon){
+
+case "Hitokage":
+
+  $("#gu_btn").on("click",function(){
+      const num=Math.ceil(Math.random()*3);
+      if (num==1){
+          $("#pc_hands").html("ぐー");
+          $("#judgment").html("あいこ");
+          $("#player_field").html('<img src="ヒトカゲ.jpg">');
+          $("#computer_field").html('<img src="ヒトカゲ.jpg">');
+          
+      }
+      if (num==2){
+      　 $("#pc_hands").html("パー");
+          $("#judgment").html("まけ");
+          $("#player_field").html('<img src="ヒトカゲ.jpg">').fadeOut(2000).fadeIn(3000);
+          $("#computer_field").html('<img src="ゼニガメ.jpg">');
+      }
+      if (num==3){
+        $("#pc_hands").html("チョキ");
+        $("#judgment").html("かち");
+        $("#player_field").html('<img src="ヒトカゲ.jpg">');
+          $("#computer_field").html('<img src="フシギダネ.jpg">').fadeOut(2000).fadeIn(3000);
+        pointGu=pointGu+1;
+        $("#Gu_point").html(pointGu);
+        pointTotal=pointGu+pointCho+pointPa;
+        $("#Total_point").html("合計 "+pointTotal);
+        }
+    });
+  $("#cho_btn").on("click",function(){
+      const num=Math.ceil(Math.random()*3);
+      if (num==1){
+          $("#pc_hands").html("グー");
+          $("#judgment").html("まけ");
+          $("#player_field").html('<img src="ヒトカゲ.jpg">').fadeOut(2000).fadeIn(3000);
+          $("#computer_field").html('<img src="ゼニガメ.jpg">');
+
+
+      }
+      if (num==2){
+          $("#pc_hands").html("チョキ");
+          $("#judgment").html("あいこ");
+          $("#player_field").html('<img src="ヒトカゲ.jpg">');
+          $("#computer_field").html('<img src="ヒトカゲ.jpg">');
+
+      }
+      if (num==3){
+        $("#pc_hands").html("パー");
+        $("#judgment").html("かち");
+        $("#player_field").html('<img src="ヒトカゲ.jpg">');
+          $("#computer_field").html('<img src="フシギダネ.jpg">').fadeOut(2000).fadeIn(3000);
+
+        pointCho=pointCho+1;
+        $("#Cho_point").html(pointCho);
+        pointTotal=pointGu+pointCho+pointPa;
+        $("#Total_point").html("合計 "+pointTotal);
+      }
+  });
+  $("#par_btn").on("click",function(){
+      const num=Math.ceil(Math.random()*3);
+      if (num==1){
+          $("#pc_hands").html("グー");
+          $("#judgment").html("かち");
+          $("#player_field").html('<img src="ヒトカゲ.jpg">');
+          $("#computer_field").html('<img src="フシギダネ.jpg">').fadeOut(2000).fadeIn(3000);
+
+          pointTotal=pointGu+pointCho+pointPa;
+          $("#Total_point").html("合計 "+pointTotal);
+      }
+      if (num==2){
+          $("#pc_hands").html("チョキ");
+          $("#judgment").html("まけ");
+          $("#player_field").html('<img src="ヒトカゲ.jpg">').fadeOut(2000).fadeIn(3000);
+          $("#computer_field").html('<img src="ゼニガメ.jpg">');
+          pointPa=pointPa+1;
+        $("#Pa_point").html(pointPa);
+      }
+      if (num==3){
+        $("#pc_hands").html("パー");
+        $("#judgment").html("あいこ");
+        $("#player_field").html('<img src="ヒトカゲ.jpg">');
+          $("#computer_field").html('<img src="ヒトカゲ.jpg">');
+
+      } 
+  });
+break;
+
+case "Fushigidane":
+
+  $("#gu_btn").on("click",function(){
+      const num=Math.ceil(Math.random()*3);
+      if (num==1){
+          $("#pc_hands").html("ぐー");
+          $("#judgment").html("あいこ");
+          $("#player_field").html('<img src="フシギダネ.jpg">');
+          $("#computer_field").html('<img src="フシギダネ.jpg">');
+          
+      }
+      if (num==2){
+      　 $("#pc_hands").html("パー");
+          $("#judgment").html("まけ");
+          $("#player_field").html('<img src="フシギダネ.jpg">').fadeOut(2000).fadeIn(3000);
+          $("#computer_field").html('<img src="ヒトカゲ.jpg">');
+      }
+      if (num==3){
+        $("#pc_hands").html("チョキ");
+        $("#judgment").html("かち");
+        $("#player_field").html('<img src="フシギダネ.jpg">');
+          $("#computer_field").html('<img src="ゼニガメ.jpg">').fadeOut(2000).fadeIn(3000);
+        pointGu=pointGu+1;
+        $("#Gu_point").html(pointGu);
+        pointTotal=pointGu+pointCho+pointPa;
+        $("#Total_point").html("合計 "+pointTotal);
+        }
+    });
+  $("#cho_btn").on("click",function(){
+      const num=Math.ceil(Math.random()*3);
+      if (num==1){
+          $("#pc_hands").html("グー");
+          $("#judgment").html("まけ");
+          $("#player_field").html('<img src="フシギダネ.jpg">').fadeOut(2000).fadeIn(3000);
+          $("#computer_field").html('<img src="ヒトカゲ.jpg">');
+
+
+      }
+      if (num==2){
+          $("#pc_hands").html("チョキ");
+          $("#judgment").html("あいこ");
+          $("#player_field").html('<img src="フシギダネ.jpg">');
+          $("#computer_field").html('<img src="フシギダネ.jpg">');
+
+      }
+      if (num==3){
+        $("#pc_hands").html("パー");
+        $("#judgment").html("かち");
+        $("#player_field").html('<img src="フシギダネ.jpg">');
+          $("#computer_field").html('<img src="ゼニガメ.jpg">').fadeOut(2000).fadeIn(3000);
+
+        pointCho=pointCho+1;
+        $("#Cho_point").html(pointCho);
+        pointTotal=pointGu+pointCho+pointPa;
+        $("#Total_point").html("合計 "+pointTotal);
+      }
+  });
+  $("#par_btn").on("click",function(){
+      const num=Math.ceil(Math.random()*3);
+      if (num==1){
+          $("#pc_hands").html("グー");
+          $("#judgment").html("かち");
+          $("#player_field").html('<img src="フシギダネ.jpg">');
+          $("#computer_field").html('<img src="ゼニガメ.jpg">').fadeOut(2000).fadeIn(3000);
+
+          pointTotal=pointGu+pointCho+pointPa;
+          $("#Total_point").html("合計 "+pointTotal);
+      }
+      if (num==2){
+          $("#pc_hands").html("チョキ");
+          $("#judgment").html("まけ");
+          $("#player_field").html('<img src="フシギダネ.jpg">').fadeOut(2000).fadeIn(3000);
+          $("#computer_field").html('<img src="ヒトカゲ.jpg">');
+          pointPa=pointPa+1;
+        $("#Pa_point").html(pointPa);
+      }
+      if (num==3){
+        $("#pc_hands").html("パー");
+        $("#judgment").html("あいこ");
+        $("#player_field").html('<img src="フシギダネ.jpg">');
+          $("#computer_field").html('<img src="フシギダネ.jpg">');
+
+      } 
+  });
+break;
+
+case "Zenigame":
+
+  $("#gu_btn").on("click",function(){
+      const num=Math.ceil(Math.random()*3);
+      if (num==1){
+          $("#pc_hands").html("ぐー");
+          $("#judgment").html("あいこ");
+          $("#player_field").html('<img src="ゼニガメ.jpg">');
+          $("#computer_field").html('<img src="ゼニガメ.jpg">');
+          
+      }
+      if (num==2){
+      　 $("#pc_hands").html("パー");
+          $("#judgment").html("まけ");
+          $("#player_field").html('<img src="ゼニガメ.jpg">').fadeOut(2000).fadeIn(3000);
+          $("#computer_field").html('<img src="フシギダネ.jpg">');
+      }
+      if (num==3){
+        $("#pc_hands").html("チョキ");
+        $("#judgment").html("かち");
+        $("#player_field").html('<img src="ゼニガメ.jpg">');
+          $("#computer_field").html('<img src="ヒトカゲ.jpg">').fadeOut(2000).fadeIn(3000);
+        pointGu=pointGu+1;
+        $("#Gu_point").html(pointGu);
+        pointTotal=pointGu+pointCho+pointPa;
+        $("#Total_point").html("合計 "+pointTotal);
+        }
+    });
+  $("#cho_btn").on("click",function(){
+      const num=Math.ceil(Math.random()*3);
+      if (num==1){
+          $("#pc_hands").html("グー");
+          $("#judgment").html("まけ");
+          $("#player_field").html('<img src="ゼニガメ.jpg">').fadeOut(2000).fadeIn(3000);
+          $("#computer_field").html('<img src="フシギダネ.jpg">');
+
+
+      }
+      if (num==2){
+          $("#pc_hands").html("チョキ");
+          $("#judgment").html("あいこ");
+          $("#player_field").html('<img src="ゼニガメ.jpg">');
+          $("#computer_field").html('<img src="ゼニガメ.jpg">');
+
+      }
+      if (num==3){
+        $("#pc_hands").html("パー");
+        $("#judgment").html("かち");
+        $("#player_field").html('<img src="ゼニガメ.jpg">');
+          $("#computer_field").html('<img src="ヒトカゲ.jpg">').fadeOut(2000).fadeIn(3000);
+
+        pointCho=pointCho+1;
+        $("#Cho_point").html(pointCho);
+        pointTotal=pointGu+pointCho+pointPa;
+        $("#Total_point").html("合計 "+pointTotal);
+      }
+  });
+  $("#par_btn").on("click",function(){
+      const num=Math.ceil(Math.random()*3);
+      if (num==1){
+          $("#pc_hands").html("グー");
+          $("#judgment").html("かち");
+          $("#player_field").html('<img src="ゼニガメ.jpg">');
+          $("#computer_field").html('<img src="ヒトカゲ.jpg">').fadeOut(2000).fadeIn(3000);
+
+          pointTotal=pointGu+pointCho+pointPa;
+          $("#Total_point").html("合計 "+pointTotal);
+      }
+      if (num==2){
+          $("#pc_hands").html("チョキ");
+          $("#judgment").html("まけ");
+          $("#player_field").html('<img src="ゼニガメ.jpg">').fadeOut(2000).fadeIn(3000);
+          $("#computer_field").html('<img src="フシギダネ.jpg">');
+          pointPa=pointPa+1;
+        $("#Pa_point").html(pointPa);
+      }
+      if (num==3){
+        $("#pc_hands").html("パー");
+        $("#judgment").html("あいこ");
+        $("#player_field").html('<img src="ゼニガメ.jpg">');
+          $("#computer_field").html('<img src="ゼニガメ.jpg">');
+
+      } 
+  });
+break;
+
+
+}
+
+
+
+
+// $("#Gu_point").html(pointTotal);
+      // if(pointTotal>2){
+      // $("#player_field").html('<img src="ヒトカゲ.jpg">')}
+      // else if(pointTotal>4){
+      // $("#player_field").html('<img src="リザード.jpg">')}
+      // else{
+      // $("#player_field").html('<img src="リザードン.jpg">')};
+
+
+
+
+</script>
+</body>
+</html>
